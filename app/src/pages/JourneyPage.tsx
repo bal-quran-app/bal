@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState } from 'react';
 import { RefreshCw, ArrowLeft, Eye, CheckCircle } from 'lucide-react';
 import { QURAN_ENTRIES, HADITH_ENTRIES } from '../../data/bal-data';
 import type { QuranEntry, HadithEntry, Confidence, Verdict } from '../../data/types';
@@ -22,7 +22,7 @@ interface ItemRoundResult {
   isSelfEvaluated?: boolean;
 }
 
-type JourneyStage = 'intro' | 'round1' | 'round2' | 'summary';
+type JourneyStage = 'intro' | 'round1' | 'between' | 'round2' | 'summary';
 
 export const JourneyPage: React.FC = () => {
   const [stage, setStage] = useState<JourneyStage>('intro');
@@ -118,12 +118,25 @@ export const JourneyPage: React.FC = () => {
     setRound1Results([]);
     setRound2Results([]);
 
-    // إعداد ترتيب عشوائي لجولة المراجعة
+    // إعداد ترتيب عشوائي للجولة الثانية
     const indices = selected.map((_, idx) => idx);
     const shuffledIndices = [...indices].sort(() => Math.random() - 0.5);
     setRound2Order(shuffledIndices);
 
     setStage('round1');
+  };
+
+  // بدء الجولة الثانية من شاشة ما بين الجولتين
+  const startRound2 = () => {
+    setStage('round2');
+    setCurrentIndex(0);
+    setUserAnswer('');
+    setConfidence(null);
+    setConfidenceError(false);
+    setInputWarning(null);
+    setEvalResult(null);
+    setSelfEvaluatedVerdict(null);
+    setShowReviewSource(false);
   };
 
   const currentItem =
@@ -160,7 +173,7 @@ export const JourneyPage: React.FC = () => {
         confidence,
       });
 
-      // 1. إصلاح: إن كان الحكم «طلب إدخال» أو «إجابة غير صالحة»
+      // إن كان الحكم «طلب إدخال» أو «إجابة غير صالحة»
       // تبقى البطاقة نفسها، ولا يُعرض المعنى، ولا يظهر زر التالي، ولا يُسجل شيء
       if (res.verdict === 'طلب إدخال' || res.verdict === 'إجابة غير صالحة') {
         let warning = res.message;
@@ -217,16 +230,8 @@ export const JourneyPage: React.FC = () => {
         setEvalResult(null);
         setSelfEvaluatedVerdict(null);
       } else {
-        // الانتقال لجولة المراجعة
-        setStage('round2');
-        setCurrentIndex(0);
-        setUserAnswer('');
-        setConfidence(null);
-        setConfidenceError(false);
-        setInputWarning(null);
-        setEvalResult(null);
-        setSelfEvaluatedVerdict(null);
-        setShowReviewSource(false);
+        // الانتقال لشاشة ما بين الجولتين
+        setStage('between');
       }
     } else if (stage === 'round2') {
       const updated = [...round2Results, roundResult];
@@ -304,7 +309,7 @@ export const JourneyPage: React.FC = () => {
             رحلة قياس الفهم والخطأ الواثق
           </h2>
           <p className="text-base sm:text-lg text-[#1D2B2A] leading-relaxed mb-4">
-            رحلة من 5 ألفاظ. في الجولة الأولى تكتب فهمك لكل لفظ ثم ترى معناه في المصدر. وفي جولة المراجعة تعود إلى الألفاظ نفسها، فنقيس الفرق.
+            رحلة من 5 ألفاظ في جولتين. في الجولة الأولى تكتب فهمك لكل لفظ ثم ترى معناه في المصدر. وفي الجولة الثانية تعود إلى الألفاظ نفسها، فنقيس الفرق. وفي آخرها يظهر ملخص رحلتك.
           </p>
 
           {compositionText && (
@@ -320,6 +325,34 @@ export const JourneyPage: React.FC = () => {
               className="w-full sm:w-auto px-10 py-3.5 bg-[#1F5F5B] hover:bg-[#164845] text-white font-bold rounded-lg text-base shadow-sm transition-colors cursor-pointer"
             >
               ابدأ
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // 2. شاشة بين الجولتين
+  if (stage === 'between') {
+    return (
+      <div className="max-w-2xl mx-auto px-4 py-12 text-center">
+        <div className="bg-white rounded-2xl p-8 border border-[#1F5F5B]/15 shadow-sm">
+          <div className="inline-flex p-3 rounded-full bg-[#1F5F5B]/10 text-[#1F5F5B] mb-4">
+            <CheckCircle className="w-8 h-8" />
+          </div>
+          <h2 className="font-amiri text-3xl font-bold text-[#1F5F5B] mb-3">
+            انتهت الجولة الأولى
+          </h2>
+          <p className="text-base sm:text-lg text-[#1D2B2A] leading-relaxed mb-6">
+            في الجولة الثانية تعود إلى الألفاظ نفسها بترتيب آخر، فتكتب فهمك لكل منها مرة أخرى. ثم يظهر ملخص رحلتك: الخطأ الواثق قبل الرحلة وبعدها.
+          </p>
+          <div>
+            <button
+              type="button"
+              onClick={startRound2}
+              className="w-full sm:w-auto px-10 py-3.5 bg-[#1F5F5B] hover:bg-[#164845] text-white font-bold rounded-lg text-base shadow-sm transition-colors cursor-pointer"
+            >
+              ابدأ الجولة الثانية
             </button>
           </div>
         </div>
@@ -351,32 +384,38 @@ export const JourneyPage: React.FC = () => {
       .map(Number)
       .sort((a, b) => a - b);
 
-    sortedDays.forEach((days) => {
-      const count = daysCounts[days];
-      if (count > 0) {
-        if (days === 1) {
-          parts.push(`${count} غداً`);
-        } else if (days === 2) {
-          parts.push(`${count} بعد يومين`);
-        } else {
-          parts.push(`${count} بعد ${days} أيام`);
-        }
+    for (const d of sortedDays) {
+      const count = daysCounts[d];
+      let durationDesc = '';
+      if (d === 1) {
+        durationDesc = 'غداً';
+      } else if (d === 2) {
+        durationDesc = 'بعد يومين';
+      } else if (d >= 3 && d <= 10) {
+        durationDesc = `بعد ${d} أيام`;
+      } else {
+        durationDesc = `بعد ${d} يوماً`;
       }
-    });
+
+      parts.push(`${count} ${durationDesc}`);
+    }
 
     const returnSentence =
-      parts.length > 0
-        ? `تعود إليك هذه الألفاظ للمراجعة: ${parts.join('، و')}.`
-        : '';
+      parts.length > 0 ? `تعود إليك هذه الألفاظ للمراجعة: ${parts.join('، و')}.` : '';
 
     return (
-      <div className="max-w-3xl mx-auto px-4 py-12 text-right">
-        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#1F5F5B]/15 shadow-sm mb-6">
-          <h2 className="font-amiri text-3xl font-bold text-[#1F5F5B] mb-4 text-center">
-            ملخص الرحلة
-          </h2>
+      <div className="max-w-2xl mx-auto px-4 py-8 text-right">
+        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#1F5F5B]/15 shadow-sm">
+          <div className="text-center mb-6">
+            <div className="inline-flex p-3 rounded-full bg-[#1F5F5B]/10 text-[#1F5F5B] mb-2">
+              <CheckCircle className="w-8 h-8" />
+            </div>
+            <h2 className="font-amiri text-3xl font-bold text-[#1F5F5B]">
+              ملخص رحلتك
+            </h2>
+          </div>
 
-          {/* إحصائيات الخطأ الواثق */}
+          {/* بطاقات مقارنة الخطأ الواثق */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
             <div className="bg-[#FAF7F0] p-4 rounded-xl border border-[#1F5F5B]/20 text-center">
               <div className="text-xs text-[#5B6B6B] mb-1 font-semibold">الخطأ الواثق قبل الرحلة</div>
@@ -406,7 +445,7 @@ export const JourneyPage: React.FC = () => {
                 <tr className="border-b border-[#1F5F5B]/20 bg-[#FAF7F0] text-[#1D2B2A]">
                   <th className="p-3 font-semibold">اللفظ</th>
                   <th className="p-3 font-semibold">حكم الجولة الأولى</th>
-                  <th className="p-3 font-semibold">حكم المراجعة</th>
+                  <th className="p-3 font-semibold">حكم الجولة الثانية</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -422,7 +461,7 @@ export const JourneyPage: React.FC = () => {
                         <span>{item.entry.word}</span>
                         {item.isReview && (
                           <span className="text-xs text-[#5B6B6B] font-sans font-normal mr-2">
-                            (مراجعة)
+                            (من رحلة سابقة)
                           </span>
                         )}
                       </td>
@@ -490,38 +529,50 @@ export const JourneyPage: React.FC = () => {
     );
   }
 
-  // 2 و 3: بطاقة اللفظ في الجولة الأولى وجولة المراجعة
+  // 3. بطاقة اللفظ في الجولة الأولى والجولة الثانية
   if (!currentItem) return null;
 
   const currentDisplayNumber = currentIndex + 1;
   const totalNumber = items.length;
-  const roundTitle = stage === 'round1' ? 'الجولة الأولى' : 'جولة المراجعة';
+  const roundTitle = stage === 'round1' ? 'الجولة الأولى' : 'الجولة الثانية';
+
+  // شريط تقدم موحد للرحلة كلها (الجولتان معاً)
+  const totalJourneySteps = 2 * totalNumber;
+  const currentJourneyStep =
+    stage === 'round1'
+      ? currentDisplayNumber
+      : totalNumber + currentDisplayNumber;
+  const journeyProgressPercent =
+    totalJourneySteps > 0 ? (currentJourneyStep / totalJourneySteps) * 100 : 0;
+
+  // هل هذا هو اللفظ الأخير في الجولة الثانية؟
+  const isLastInRound2 =
+    stage === 'round2' && currentIndex + 1 === items.length;
 
   // مصدر المعنى هل يُعرض؟
-  // في جولة المراجعة: يُطوى تحت زر ما لم تكن الحالة "امتناع لضعف الثقة" أو ضغط المستخدم على العرض
+  // في الجولة الثانية: يُطوى تحت زر ما لم تكن الحالة "امتناع لضعف الثقة" أو ضغط المستخدم على العرض
   const shouldShowSource =
     stage === 'round1' || showReviewSource || isWeakConfidence;
 
   return (
     <div className="max-w-2xl mx-auto px-4 py-8 text-right">
-      {/* شريط التقدم والوسوم */}
-      <div className="flex items-center justify-between text-xs text-[#5B6B6B] mb-2 font-medium">
+      {/* سطر التقدم وشريط التقدم الموحد */}
+      <div className="flex items-center justify-between text-sm font-bold text-[#1D2B2A] mb-2">
         <div className="flex items-center gap-2">
-          <span>{roundTitle}</span>
+          <span>
+            {roundTitle}: اللفظ {currentDisplayNumber} من {totalNumber}
+          </span>
           {currentItem.isReview && (
             <span className="text-xs bg-[#1F5F5B]/10 text-[#1F5F5B] px-2 py-0.5 rounded-sm font-semibold">
-              مراجعة
+              من رحلة سابقة
             </span>
           )}
         </div>
-        <span>
-          {currentDisplayNumber} من {totalNumber}
-        </span>
       </div>
       <div className="w-full bg-[#FAF7F0] border border-[#1F5F5B]/20 h-2 rounded-full mb-6 overflow-hidden">
         <div
           className="bg-[#1F5F5B] h-full transition-all duration-300"
-          style={{ width: `${(currentDisplayNumber / totalNumber) * 100}%` }}
+          style={{ width: `${journeyProgressPercent}%` }}
         />
       </div>
 
@@ -578,52 +629,53 @@ export const JourneyPage: React.FC = () => {
                   if (inputWarning) setInputWarning(null);
                 }}
                 placeholder="اكتب فهمك بكلماتك…"
-                className="w-full p-3 rounded-lg border border-[#8A9A9A]/60 focus:border-[#1F5F5B] focus:ring-1 focus:ring-[#1F5F5B] text-base font-sans outline-hidden bg-[#FAF7F0]/30 resize-none"
+                className="w-full p-3.5 border border-[#1F5F5B]/25 rounded-xl focus:border-[#1F5F5B] focus:ring-1 focus:ring-[#1F5F5B] outline-none text-[#1D2B2A] text-base leading-relaxed bg-[#FAF7F0]/40 transition-colors"
               />
-
-              {/* تنبيه الأحكام التي لا تكشف المعنى (طلب إدخال أو إجابة غير صالحة) */}
-              {inputWarning && (
-                <div className="text-sm font-semibold text-[#B7791F] mt-2 bg-[#B7791F]/10 p-3 rounded-lg border border-[#B7791F]/25 leading-relaxed">
-                  {inputWarning}
-                </div>
-              )}
             </div>
 
+            {/* رسالة التنبيه إن كانت الإجابة طلباً للإدخال أو غير صالحة */}
+            {inputWarning && (
+              <div className="p-3 bg-amber-50 border border-amber-200 text-amber-900 rounded-lg text-sm font-medium">
+                {inputWarning}
+              </div>
+            )}
+
+            {/* مستوى التأكد: أزرار الراديو الثلاثة */}
             <div>
-              <span className="block text-sm font-semibold text-[#1D2B2A] mb-2">
-                ما مدى تأكدك؟
-              </span>
-              <div className="grid grid-cols-3 gap-2">
-                {(['متأكد', 'متردد', 'لا أعرف'] as Confidence[]).map((conf) => {
-                  const isSelected = confidence === conf;
+              <div className="block text-sm font-semibold text-[#1D2B2A] mb-2.5">
+                ما مدى تأكدك من هذا الفهم؟
+              </div>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3">
+                {(['متأكد', 'متردد', 'لا أعرف'] as Confidence[]).map((level) => {
+                  const isSelected = confidence === level;
                   return (
                     <button
-                      key={conf}
+                      key={level}
                       type="button"
                       onClick={() => {
-                        setConfidence(conf);
+                        setConfidence(level);
                         setConfidenceError(false);
                       }}
-                      className={`py-2 px-3 rounded-lg text-sm font-medium border transition-colors cursor-pointer ${
+                      className={`py-2.5 px-3 rounded-xl border text-sm font-bold transition-all cursor-pointer text-center ${
                         isSelected
-                          ? 'bg-[#1F5F5B] text-white border-[#1F5F5B]'
+                          ? 'bg-[#1F5F5B] text-white border-[#1F5F5B] shadow-2xs'
                           : 'bg-[#FAF7F0] text-[#1D2B2A] border-[#1F5F5B]/20 hover:bg-[#1F5F5B]/5'
                       }`}
                     >
-                      {conf}
+                      {level}
                     </button>
                   );
                 })}
               </div>
 
-              {/* تنبيه عند عدم اختيار مستوى التأكد */}
               {confidenceError && (
-                <div className="text-xs font-semibold text-[#B42318] mt-2">
-                  اختر مدى تأكدك أولاً.
+                <div className="text-xs text-[#B42318] font-bold mt-2">
+                  يرجى تحديد مدى تأكدك قبل المتابعة.
                 </div>
               )}
             </div>
 
+            {/* زر الإرسال للمقارنة */}
             <button
               type="button"
               onClick={handleSubmitAnswer}
@@ -646,7 +698,7 @@ export const JourneyPage: React.FC = () => {
               aiModel={evalResult.aiModel}
             />
 
-            {/* في جولة المراجعة (إذا لم تكن حالة ضعف الثقة): يُطوى المعنى تحت زر */}
+            {/* في الجولة الثانية (إذا لم تكن حالة ضعف الثقة): يُطوى المعنى تحت زر */}
             {stage === 'round2' && !shouldShowSource && (
               <div className="text-center py-2">
                 <button
@@ -754,14 +806,14 @@ export const JourneyPage: React.FC = () => {
               </div>
             )}
 
-            {/* زر التالي */}
+            {/* زر التالي / اعرض ملخص رحلتك */}
             <div className="pt-4">
               <button
                 type="button"
                 onClick={handleNext}
                 className="w-full py-3.5 bg-[#1F5F5B] hover:bg-[#164845] text-white font-bold rounded-lg text-base shadow-sm transition-colors cursor-pointer flex items-center justify-center gap-2"
               >
-                <span>التالي</span>
+                <span>{isLastInRound2 ? 'اعرض ملخص رحلتك' : 'التالي'}</span>
                 <ArrowLeft className="w-5 h-5 rtl:rotate-180" />
               </button>
             </div>
