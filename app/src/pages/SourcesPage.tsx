@@ -287,7 +287,7 @@ export const SourcesPage: React.FC = () => {
       <section className="bg-white rounded-xl p-6 sm:p-8 border border-[#1F5F5B]/15 shadow-xs mb-8">
         <h2 className="font-amiri text-2xl font-bold text-[#1D2B2A] mb-4">الخصوصية</h2>
         <p className="text-base text-[#1D2B2A] leading-relaxed mb-6">
-          لا يتطلب «بَلْ» تسجيل دخول، ولا يجمع أي بيانات شخصية. يُحفظ تقدّمك في متصفحك على هذا الجهاز فقط، ويمكنك مسحه في أي وقت. وتُرسل الإجابة التي تكتبها وحدها عبر OpenRouter إلى Gemini من Google لتصنيفها، دون أي معلومة تعرّف بك.
+          لا يتطلب «بَلْ» تسجيل دخول، ولا يجمع أي بيانات شخصية. يُحفظ تقدّمك في متصفحك على هذا الجهاز فقط، ويمكنك مسحه في أي وقت. وتُرسل الإجابة التي تكتبها وحدها عبر OpenRouter إلى Gemini من Google لتصنيفها، دون أي معلومة تعرّف بك. وفي ملخص الرحلة زر لمشاركة نتيجتك، ولا يخرج منها شيء إلا إن شاركتها أنت.
         </p>
 
         {clearedStatus && (

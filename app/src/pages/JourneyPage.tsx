@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { RefreshCw, ArrowLeft, Eye, CheckCircle } from 'lucide-react';
+import { RefreshCw, ArrowLeft, Eye, CheckCircle, Share2, Copy } from 'lucide-react';
 import { QURAN_ENTRIES, HADITH_ENTRIES } from '../../data/bal-data';
 import type { QuranEntry, HadithEntry, Confidence, Verdict } from '../../data/types';
 import { evaluate, EvaluationResult } from '../services/evaluate';
@@ -23,6 +23,87 @@ interface ItemRoundResult {
 }
 
 type JourneyStage = 'intro' | 'round1' | 'between' | 'round2' | 'summary';
+
+// ===== مشاركة نتيجة الرحلة =====
+// نص ثابت الشكل يرسله المستخدم بنفسه إن شاء. لا يحوي تعليق Gemini ولا اسم النموذج ولا أي معرّف.
+
+const SHARE_URL = 'https://bal-quran.ai.studio';
+
+const pad2 = (n: number) => String(n).padStart(2, '0');
+
+// التاريخ والوقت بتوقيت جهاز المستخدم: YYYY-MM-DD HH:MM
+const formatLocalDateTime = (d: Date) =>
+  `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())} ${pad2(d.getHours())}:${pad2(d.getMinutes())}`;
+
+const itemPosition = (item: JourneyItem) =>
+  item.type === 'quran'
+    ? `${item.entry.surahName} ${item.entry.ayahNumber}`
+    : `حديث: ${item.entry.takhrij}`;
+
+// سطر جولة واحدة: الإجابة · التأكد · الحكم
+const roundLine = (label: string, r?: ItemRoundResult) => {
+  if (!r) return `${label}: —`;
+  const answer = r.userAnswer.replace(/\s+/g, ' ').trim();
+  const answerPart = answer ? `«${answer}»` : '—';
+  const verdictPart = r.isSelfEvaluated ? `${r.finalVerdict} (تقييم ذاتي)` : r.finalVerdict;
+  return `${label}: ${answerPart} · ${r.confidence} · ${verdictPart}`;
+};
+
+const buildShareText = (
+  items: JourneyItem[],
+  round1Results: ItemRoundResult[],
+  round2Results: ItemRoundResult[],
+  finishedAt: Date
+) => {
+  const total = items.length;
+  const before = round1Results.filter((r) => r.finalVerdict === 'خطأ واثق').length;
+  const after = round2Results.filter((r) => r.finalVerdict === 'خطأ واثق').length;
+
+  const lines: string[] = [
+    'نتيجة رحلة «بَلْ»',
+    `التاريخ: ${formatLocalDateTime(finishedAt)}`,
+    `الخطأ الواثق: قبل الرحلة ${before} من ${total}، وبعدها ${after} من ${total}`,
+  ];
+
+  items.forEach((item, idx) => {
+    const r1 = round1Results.find((r) => r.itemId === item.entry.id);
+    const r2 = round2Results.find((r) => r.itemId === item.entry.id);
+    const reviewMark = item.isReview ? ' — من رحلة سابقة' : '';
+    lines.push(`${idx + 1}. ${item.entry.word} (${itemPosition(item)})${reviewMark}`);
+    lines.push(roundLine('الجولة الأولى', r1));
+    lines.push(roundLine('الجولة الثانية', r2));
+  });
+
+  lines.push(SHARE_URL);
+  return lines.join('\n');
+};
+
+// النسخ: واجهة الحافظة أولاً، ثم الطريقة القديمة. يرجع false إن فشل الاثنان.
+const copyText = async (text: string): Promise<boolean> => {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    // ننتقل إلى الطريقة القديمة
+  }
+  try {
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly', '');
+    ta.style.position = 'fixed';
+    ta.style.top = '-1000px';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    const ok = document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  } catch {
+    return false;
+  }
+};
 
 export const JourneyPage: React.FC = () => {
   const [stage, setStage] = useState<JourneyStage>('intro');
@@ -51,6 +132,33 @@ export const JourneyPage: React.FC = () => {
   const [round1Results, setRound1Results] = useState<ItemRoundResult[]>([]);
   const [round2Order, setRound2Order] = useState<number[]>([]);
   const [round2Results, setRound2Results] = useState<ItemRoundResult[]>([]);
+
+  // مشاركة النتيجة: وقت انتهاء الرحلة، وحالة النسخ
+  const [finishedAt, setFinishedAt] = useState<Date | null>(null);
+  const [shareStatus, setShareStatus] = useState<'idle' | 'copied' | 'manual'>('idle');
+
+  const getShareText = () =>
+    buildShareText(items, round1Results, round2Results, finishedAt ?? new Date());
+
+  // نسخ النص، وإن تعذّر يظهر في مربع ليُنسخ يدوياً
+  const handleCopyResult = async () => {
+    const ok = await copyText(getShareText());
+    setShareStatus(ok ? 'copied' : 'manual');
+  };
+
+  // المشاركة من الجهاز إن كانت متاحة، وإلا النسخ
+  const handleShareResult = async () => {
+    const text = getShareText();
+    if (typeof navigator.share === 'function') {
+      try {
+        await navigator.share({ text });
+        return;
+      } catch (err) {
+        if (err instanceof Error && err.name === 'AbortError') return;
+      }
+    }
+    await handleCopyResult();
+  };
 
   // بدء رحلة جديدة بنظام المراجعة المتباعدة
   const startJourney = () => {
@@ -117,6 +225,8 @@ export const JourneyPage: React.FC = () => {
     setSelfEvaluatedVerdict(null);
     setRound1Results([]);
     setRound2Results([]);
+    setFinishedAt(null);
+    setShareStatus('idle');
 
     // إعداد ترتيب عشوائي للجولة الثانية
     const indices = selected.map((_, idx) => idx);
@@ -271,6 +381,7 @@ export const JourneyPage: React.FC = () => {
           confidentWrongAfter,
         });
 
+        setFinishedAt(new Date());
         setStage('summary');
       }
     }
@@ -506,6 +617,51 @@ export const JourneyPage: React.FC = () => {
                 })}
               </tbody>
             </table>
+          </div>
+
+          {/* مشاركة النتيجة */}
+          <div className="my-6 text-center">
+            <p className="text-sm text-[#5B6B6B] mb-3">
+              يمكنك مشاركة نتيجة رحلتك، وليس فيها اسمك ولا أي معلومة تعرّف بك.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-2">
+              <button
+                type="button"
+                onClick={handleShareResult}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white hover:bg-[#1F5F5B]/5 text-[#1F5F5B] border border-[#1F5F5B] font-bold rounded-lg transition-colors cursor-pointer"
+              >
+                <Share2 className="w-4 h-4" />
+                <span>شارك نتيجتك</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleCopyResult}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-3 text-sm text-[#5B6B6B] hover:text-[#1F5F5B] font-medium rounded-lg transition-colors cursor-pointer"
+              >
+                <Copy className="w-4 h-4" />
+                <span>انسخ النص</span>
+              </button>
+            </div>
+            {shareStatus === 'copied' && (
+              <div className="mt-3 text-sm font-semibold text-[#2E7D4F]">
+                نُسخت النتيجة. الصقها في رسالتك.
+              </div>
+            )}
+            {shareStatus === 'manual' && (
+              <div className="mt-3 text-right">
+                <div className="text-sm text-[#5B6B6B] mb-2">
+                  تعذّر النسخ تلقائياً. حدّد النص وانسخه:
+                </div>
+                <textarea
+                  readOnly
+                  dir="rtl"
+                  rows={12}
+                  value={getShareText()}
+                  onFocus={(e) => e.currentTarget.select()}
+                  className="w-full p-3 border border-[#1F5F5B]/25 rounded-xl text-sm leading-relaxed text-[#1D2B2A] bg-[#FAF7F0]/40"
+                />
+              </div>
+            )}
           </div>
 
           {/* أزرار الإجراءات */}
