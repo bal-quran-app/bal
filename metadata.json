@@ -1,0 +1,8 @@
+{
+  "name": "بَلْ",
+  "description": "تجربة تفاعلية تكشف للقارئ العربي ألفاظاً في القرآن الكريم والحديث الشريف يظن أنه يفهمها، وهو يفهمها على معناها المعاصر.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
