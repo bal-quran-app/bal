@@ -120,7 +120,7 @@ export const HomePage: React.FC = () => {
           className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#1F5F5B] hover:bg-[#164845] text-white px-8 py-3.5 rounded-lg font-bold text-base transition-colors shadow-sm"
         >
           <span>ابدأ الرحلة</span>
-          <ArrowLeft className="w-5 h-5 rtl:rotate-180" />
+          <ArrowLeft className="w-5 h-5" />
         </a>
 
         <a

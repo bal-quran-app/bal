@@ -196,6 +196,15 @@ export const WordsPage: React.FC = () => {
                           isSubBox={true}
                         />
                       )}
+
+                      <div className="mt-3 text-left">
+                        <a
+                          href={`#/embed/${q.id}`}
+                          className="text-xs font-semibold text-[#1F5F5B] hover:text-[#164845] underline underline-offset-4"
+                        >
+                          بطاقة هذا اللفظ للتضمين
+                        </a>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -263,6 +272,15 @@ export const WordsPage: React.FC = () => {
                           isSubBox={true}
                         />
                       )}
+
+                      <div className="mt-3 text-left">
+                        <a
+                          href={`#/embed/${h.id}`}
+                          className="text-xs font-semibold text-[#1F5F5B] hover:text-[#164845] underline underline-offset-4"
+                        >
+                          بطاقة هذا اللفظ للتضمين
+                        </a>
+                      </div>
                     </div>
                   )}
                 </div>

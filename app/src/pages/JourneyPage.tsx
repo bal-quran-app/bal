@@ -970,7 +970,7 @@ export const JourneyPage: React.FC = () => {
                 className="w-full py-3.5 bg-[#1F5F5B] hover:bg-[#164845] text-white font-bold rounded-lg text-base shadow-sm transition-colors cursor-pointer flex items-center justify-center gap-2"
               >
                 <span>{isLastInRound2 ? 'اعرض ملخص رحلتك' : 'التالي'}</span>
-                <ArrowLeft className="w-5 h-5 rtl:rotate-180" />
+                <ArrowLeft className="w-5 h-5" />
               </button>
             </div>
           </div>

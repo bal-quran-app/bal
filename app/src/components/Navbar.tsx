@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Menu, X, BookOpen, Compass, List, ShieldAlert, Library } from 'lucide-react';
+import { Menu, X, BookOpen, Compass, List, ShieldAlert, Library, Code } from 'lucide-react';
 
 interface NavbarProps {
   currentHash: string;
@@ -12,6 +12,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentHash }) => {
     { hash: '#/', label: 'الرئيسية', icon: Compass },
     { hash: '#/journey', label: 'الرحلة', icon: BookOpen },
     { hash: '#/words', label: 'الألفاظ', icon: List },
+    { hash: '#/embed', label: 'الدمج', icon: Code },
     { hash: '#/tests', label: 'اختبار الحالات', icon: ShieldAlert },
     { hash: '#/sources', label: 'المصادر', icon: Library },
   ];
