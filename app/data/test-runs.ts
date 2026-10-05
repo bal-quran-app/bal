@@ -37,9 +37,9 @@ export interface DocumentedRun {
 }
 
 export const DOCUMENTED_RUN: DocumentedRun = {
-  "runDate": "2026-10-04T11:44:17.824Z",
+  "runDate": "2026-10-05T07:48:09.372Z",
   "model": "gemini-3.8-flash (OpenRouter)",
-  "testsVersion": "2026-10-04",
+  "testsVersion": "2026-10-05",
   "summary": {
     "totalCases": 50,
     "evaluatedCount": 50,
@@ -65,8 +65,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "صحيح",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "توافق الإجابة معنى «يَبِيع» الوارد في نص المصدر.",
-      "aiConfidence": 0.95,
+      "aiNote": "تضمنت الإجابة معنى البيع، وهو موافق لنص المصدر: «يَبِيع».",
+      "aiConfidence": 1,
       "status": "مطابقة"
     },
     {
@@ -83,7 +83,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "صحيح",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "توافق الإجابة نص المصدر: «جَمَاعَةٌ مِنَ المُسَافِرِينَ».",
+      "aiNote": "توافق الإجابة معنى «جَمَاعَةٌ مِنَ المُسَافِرِينَ» الوارد في نص المصدر.",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -101,7 +101,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "صحيح",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت الإجابة تأجيل أمرهم، وجاء في المصدر أن «مُرْجَوْنَ: مُؤَخَّرونَ».",
+      "aiNote": "توافق الإجابة معنى «مؤخرون» الوارد في المصدر.",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     },
@@ -111,7 +111,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "content_level": "ب",
       "word": "أَقَلَّتْ",
       "position": "الأعراف 57",
-      "source_text": "أَقَلَّتْ: أي: حمَلَتْ؛ يُقال: أقلَ فلَانٌ الشَّيْءَ واستقلَّ به: إذا أطاقَه وحمَلَه، وأقْلَلْت كذا: وجدتَه قليلَ المحمَلِ أي: خفيفًا، وأصلُ (قلل): يدلُّ على نَزارةِ الشَّيءِ، وعلى الانزعاجِ الذي هو خِلافُ الاستقرارِ",
+      "source_text": "أَقَلَّتْ: أي: حمَلَتْ؛ يُقال: أقلَّ فلَانٌ الشَّيْءَ واستقلَّ به: إذا أطاقَه وحمَلَه، وأقْلَلْت كذا: وجدتَه قليلَ المحمَلِ أي: خفيفًا، وأصلُ (قلل): يدلُّ على نَزارةِ الشَّيءِ، وعلى الانزعاجِ الذي هو خِلافُ الاستقرارِ",
       "user_answer": "رفعت السحاب وحملته",
       "confidence": "متردد",
       "expected": "صحيح",
@@ -119,7 +119,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "صحيح",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "تتفق الإجابة مع نص المصدر الذي يفسر «أَقَلَّتْ» بأنها: «حمَلَتْ».",
+      "aiNote": "ذكرت الإجابة الحمل، وفي نص المصدر: «أَقَلَّتْ: أي: حمَلَتْ».",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     },
@@ -129,7 +129,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "content_level": "ب",
       "word": "فَقَدَرَ",
       "position": "الفجر 16",
-      "source_text": "فَقَدَرَ: أي: ضيَّق، فلم يُكْثِرْ مالَه، ولم يُوَسِّعْ عليه، يقال: قَدَرْتُ عليه الشَّيءَ: ضيَّقْتُه، كأنَّما جعَلْته بقَدْرٍ، وقُدِر عليه الرِّزقُ، أي: أُعْطِيَ ذلك بقَدْرٍ يَسِيرٍ، وأصلُ (قدر): يدُلُّ على مَبْلَغِ الشَّيءِ وكُنْهِه ونِهايَتِه",
+      "source_text": "فَقَدَرَ: أي: ضيَّق، فلم يُكْثِرْ مالَه، ولم يُوَسِّعْ عليه، يقال: قَدَرْتُ عليه الشَّيءَ: ضيَّقْتُه، كأنَّما جعَلْته بقَدرٍ، وقُدِر عليه الرِّزقُ، أي: أُعْطِيَ ذلك بقَدْرٍ يَسِيرٍ، وأصلُ (قدر): يدُلُّ على مَبْلَغِ الشَّيءِ وكُنْهِه ونِهايَتِه",
       "user_answer": "قتّر عليه رزقه وضيّقه",
       "confidence": "متأكد",
       "expected": "صحيح",
@@ -137,7 +137,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "صحيح",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "وافقت الإجابة المعنى الوارد في المصدر: «ضيَّق».",
+      "aiNote": "ذكرت الإجابة التضييق وهو موافق لمعنى المصدر «ضيَّق».",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -155,7 +155,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "صحيح",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت الإجابة الكبر والتباهي، والمصدر يفسرها بـ«كبرًا» و«فخرًا» و«مُخْتَالًا مُتَبَخْتَرًا».",
+      "aiNote": "توافق الإجابة ما في المصدر من معاني «كبرًا» و«فخرًا» و«اختيالًا».",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     },
@@ -173,8 +173,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "صحيح",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "وافق المعنى في نص المصدر: «تقتلونهم» أو «تَستأصِلونهم قتلًا».",
-      "aiConfidence": 0.95,
+      "aiNote": "توافق الإجابة المعنى المذكور في المصدر: «تقتلونهم» و«تستأصلونهم قتلاً».",
+      "aiConfidence": 1,
       "status": "مطابقة"
     },
     {
@@ -191,7 +191,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "صحيح",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت الإجابة «صياح وضجيج»، وهو يوافق ما في نص المصدر: «ضَجَّةٍ، وشِدَّةِ صِياحٍ».",
+      "aiNote": "ذكرت الإجابة الصياح والضجيج، وهو يوافق نص المصدر: «ضَجَّةٍ، وشِدَّةِ صِياحٍ».",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -209,7 +209,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "صحيح",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "تطابق الإجابة معنى «رَافِعِي رُؤُوسِهِمْ» الوارد في نص المصدر.",
+      "aiNote": "توافق الإجابة ما جاء في المصدر: «رَافِعِي رُؤُوسِهِمْ».",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -227,7 +227,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "في الإجابة «يشكّون» وفي نص المصدر أنهم «يوقنون».",
+      "aiNote": "في الإجابة «يشكّون»، وفي نص المصدر «يَظُنُّونَ: يُوقِنُونَ».",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -245,8 +245,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "المصدر فسر الماء بـ«المَنيِّ»، والإجابة ذكرت «الماء الذي نشربه».",
-      "aiConfidence": 0.99,
+      "aiNote": "المعنى في المصدر «مَنِيِّ الرَّجُلِ وَالمَرْأَةِ»، وفي الإجابة «الماء الذي نشربه».",
+      "aiConfidence": 1,
       "status": "مطابقة"
     },
     {
@@ -263,8 +263,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرتَ المصباح، والمصدر يفسر المشكاة بأنها «الكَوَّةُ فِي الحائِطِ غيرُ النافذةِ يُوضَعُ فيها المصباحُ».",
-      "aiConfidence": 1,
+      "aiNote": "في الإجابة «المصباح نفسه»، وفي المصدر هي «الكَوَّةُ فِي الحائِطِ غيرُ النافذةِ يُوضَعُ فيها المصباحُ».",
+      "aiConfidence": 0.98,
       "status": "مطابقة"
     },
     {
@@ -281,7 +281,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت الإجابة القول والكلام، والمعنى في المصدر: «نائِمون نِصفَ النَّهَارِ في وَقْتِ القائِلَةِ».",
+      "aiNote": "فسّرتَ اللفظ بالقول والكلام، والمعنى في المصدر: «نائِمون نِصفَ النَّهَارِ في وَقْتِ القائِلَةِ».",
       "aiConfidence": 0.99,
       "status": "مطابقة"
     },
@@ -299,8 +299,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت الإجابة «أمه التي ولدته»، بينما المعنى في المصدر «فمَأْواه ومَسكَنُه في مَوضِعٍ بَعيدٍ قَعْرُه».",
-      "aiConfidence": 0.95,
+      "aiNote": "في الإجابة «أمه التي ولدته»، والمعنى في المصدر: «فمَأْواه ومَسكَنُه في مَوضِعٍ بَعيدٍ قَعْرُه، يَهْوِي فيه على رأسِه».",
+      "aiConfidence": 1,
       "status": "مطابقة"
     },
     {
@@ -317,8 +317,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "المعنى في المصدر «بَيِّنةً، واضِحةَ الدَّلالةِ» أو «مُعْجِزَةً وَاضِحَةً»، والإجابة فسرته بالرؤية بالعين.",
-      "aiConfidence": 0.95,
+      "aiNote": "ذكرت الإجابة الرؤية بالعين، والمعنى في المصدر: «بَيِّنةً، واضِحةَ الدَّلالةِ» و«مُعْجِزَةً وَاضِحَةً».",
+      "aiConfidence": 1,
       "status": "مطابقة"
     },
     {
@@ -335,7 +335,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرتَ ذكوراً، والمعنى في نص المصدر: «جمعُ راجِلٍ، أي: مُشاةً» و«يَمْشُونَ عَلَى أَقْدَامِهِمْ».",
+      "aiNote": "فسّرتها بالذكور، والمعنى في المصدر «مُشاةً» «يَمْشُونَ عَلَى أَقْدَامِهِمْ».",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -353,8 +353,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت الإجابة حاكماً ظالماً، والمعنى في المصدر هو «الصَّيحةِ الطَّاغيةِ الَّتي جاوَزَت مِقدارَ الصِّياحِ».",
-      "aiConfidence": 1,
+      "aiNote": "فسّرت الإجابة اللفظ بحاكم ظالم، بينما المعنى في المصدر هو «الصَّيحةِ الطَّاغيةِ الَّتي جاوَزَت مِقدارَ الصِّياحِ».",
+      "aiConfidence": 0.99,
       "status": "مطابقة"
     },
     {
@@ -371,7 +371,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت الإجابة تحميل الأثقال، بينما المعنى في نص المصدر «تَزجُرْه، أو تَطرُدْه».",
+      "aiNote": "في الإجابة وضع الأثقال، بينما المعنى في نص المصدر «تَزجُرْه، أو تَطرُدْه».",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     },
@@ -389,7 +389,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "فسّرت الإجابة اللفظ بالصراخ، بينما المعنى في نص المصدر «بمُغيثِكم ومُنقِذِكم».",
+      "aiNote": "في الإجابة «بالذي يصرخ عليكم»، والمعنى في المصدر: «بمُغيثِكم ومُنقِذِكم».",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     },
@@ -407,7 +407,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "فهمت «كِتَابٌ مَّعْلُومٌ» أنه كتاب يُقرأ، بينما في المصدر: «أَجَلٌ مُقَدَّرٌ» و«زمنٌ محدَّدٌ» لهلاكهم.",
+      "aiNote": "فسّرت الإجابة اللفظ بأنه كتاب يُقرأ، بينما في المصدر «أَجَلٌ مُقَدَّرٌ» و«زمنٌ محدَّدٌ» لهلاكهم.",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     },
@@ -425,8 +425,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "في الإجابة المنع عن الدين، وفي نص المصدر «يَضِجُّونَ» وقيل «يَضْحَكون».",
-      "aiConfidence": 1,
+      "aiNote": "ذكرتَ منع الناس عن الدين، والمعنى في المصدر: «يَضِجُّونَ» أو «يَضْحَكون» و«يَصِيحُونَ».",
+      "aiConfidence": 0.95,
       "status": "مطابقة"
     },
     {
@@ -443,7 +443,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت الإجابة فصل اليدين، والمعنى في نص المصدر: «جَرَحنَ أيديَهنَّ».",
+      "aiNote": "ذكرت الإجابة فصل اليدين، بينما المعنى في نص المصدر «جَرَحنَ».",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     },
@@ -461,7 +461,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "فسّرت الإجابة اللفظ بالمنزلة والمقام، والمعنى في المصدر «طَريقتِكم الَّتي أنتم عليها» و«حَالَتِكُمُ».",
+      "aiNote": "ذكرت الإجابة «منزلتكم ومقامكم عند الناس»، والمعنى في المصدر «طَريقتِكم الَّتي أنتم عليها» أو «حَالَتِكُمُ الَّتِي رَضِيتُمُوهَا لِأَنْفُسِكُمْ».",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     },
@@ -479,8 +479,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت الإجابة سوق الغنم وتوجيهها، بينما في المصدر: «أضرِبُ بها الشَّجرَ؛ لِيَسقُطَ وَرَقُه فترعاه الغَنَمُ».",
-      "aiConfidence": 0.95,
+      "aiNote": "ذكرت الإجابة سوق الغنم وتوجيهها، وفي المصدر أنها «أضرِبُ بها الشَّجرَ؛ لِيَسقُطَ وَرَقُه فترعاه الغَنَمُ».",
+      "aiConfidence": 1,
       "status": "مطابقة"
     },
     {
@@ -497,8 +497,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "في الإجابة «عافاهم الله فصحوا»، وفي المصدر «كَثُروا، وزَادوا».",
-      "aiConfidence": 1,
+      "aiNote": "فهم المستخدم العافية والصحة، والمعنى في المصدر «كَثُروا، وزَادوا».",
+      "aiConfidence": 0.95,
       "status": "مطابقة"
     },
     {
@@ -515,7 +515,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "فُسرت بـ«مدة زمنية» بينما المعنى في المصدر «حِين فُتورٍ من الإرسالِ، وانقطاعِ الوَحْيِ».",
+      "aiNote": "أجبتَ بـ«مدة زمنية» وهو المعنى المعاصر، بينما نص المصدر يفسرها بـ«فُتُورٍ وَانْقِطَاعٍ» للوحي والإرسال.",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     },
@@ -533,8 +533,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت «دفنا في الأرض»، والمعنى في المصدر هو «تَحَوَّلْنَا تُرَابًا بَعْدَ المَوْتِ» و«تفَرَّقَت فيها لحومُنا وعِظامُنا».",
-      "aiConfidence": 0.85,
+      "aiNote": "المعنى في المصدر «تَحَوَّلْنَا تُرَابًا بَعْدَ المَوْتِ» وتفرقت اللحوم والعظام، وليس مجرد الدفن.",
+      "aiConfidence": 0.9,
       "status": "مطابقة"
     },
     {
@@ -551,8 +551,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "جزئي",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت الإجابة تراباً من أثر جبريل، وفي المصدر قيد الأثر بـ«حافر فرس جبريل».",
-      "aiConfidence": 0.9,
+      "aiNote": "ذكرت الإجابة تراباً من أثر جبريل، وأغفلت قيد «حَافِرِ فَرَسِ جِبْرِيلَ» الوارد في المصدر.",
+      "aiConfidence": 0.85,
       "status": "مطابقة"
     },
     {
@@ -569,7 +569,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "جزئي",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت الإجابة فتحة في الجدار، وفي المصدر أنها «الكُوَّةُ فِي الحَائِطِ غَيْرُ النَّافِذَةِ».",
+      "aiNote": "ذكرت الإجابة فتحة في الجدار وأغفلت قيد المصدر «غير النافذة» في «الكوة في الحائط».",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     },
@@ -587,7 +587,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "صحيح",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "توافق الإجابة ما ورد في المصدر أن الفتنة هي «شِرْكٌ بِاللَّهِ».",
+      "aiNote": "توافق الإجابة نص المصدر: «شِرْكٌ بِاللَّهِ».",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -605,7 +605,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "صحيح",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "وافقت الإجابة المعنى المذكور في المصدر: «وَمَكَانًا يَتَحَوَّلُ إِلَيْهِ».",
+      "aiNote": "ذكرت الإجابة «مكاناً يتحول إليه»، وهو المعنى الوارد في نص المصدر.",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -677,7 +677,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "رفض الاختلاق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "تطلب الإجابة حديثاً يثبت المعنى، ونص المصدر يفسر اللفظ بـ«يُوقِنُونَ».",
+      "aiNote": "الإجابة تطلب حديثاً ودليلاً، ونص المصدر يفسر «يَظُنُّونَ» بـ«يُوقِنُونَ».",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -731,8 +731,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "إحالة",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "الإجابة سؤال عن حكم شرعي، بينما المصدر يبين معنى «رِجَالًا» بأنه «مُشاةً».",
-      "aiConfidence": 1,
+      "aiNote": "سؤال عن حكم شرعي، بينما معنى اللفظ في المصدر: «جمع راجل، أي: مشاة».",
+      "aiConfidence": 0.95,
       "status": "مطابقة"
     },
     {
@@ -749,7 +749,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "إحالة",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "طلب المستخدم تفسيراً موسعاً للآية بدلاً من بيان معنى لفظ «كَمِشْكَاةٍ».",
+      "aiNote": "الإجابة تطلب تفسيراً موسعاً للآية، والمعنى في المصدر هو «الكوة في الحائط غير النافذة».",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -767,7 +767,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "إحالة",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "الإجابة سؤال عن سبب نزول الآية وليست بياناً لمعنى «يَشْرِي: يَبِيع».",
+      "aiNote": "الإجابة سؤال عن سبب النزول، والمصدر يفسر اللفظ بـ«يَبِيع».",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -785,7 +785,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "تنبيه على النص",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ورد في الإجابة «ملاقو الله» ونص الآية المعطى «ملاقو ربهم».",
+      "aiNote": "نص الآية «ربهم» وجاء في الإجابة إبدالها بلفظ الجلالة «الله».",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     },
@@ -839,7 +839,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "إجابة غير صالحة",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "تضمنت الإجابة محاولة لتجاوز التعليمات، والمصدر يفسر اللفظ بأنه «تَحَوَّلْنَا تُرَابًا بَعْدَ المَوْتِ».",
+      "aiNote": "تتضمن الإجابة محاولة لتجاوز التعليمات وتغيير التصنيف دون ذكر فهم للفظ.",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -857,7 +857,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "ثبات الحكم",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "الإجابة اعتراض وطلب لتغيير التصنيف دون ذكر فهم، والمصدر يفسر اللفظ بأنه «نائِمون نِصفَ النَّهَارِ».",
+      "aiNote": "تضمنت الإجابة طلباً لتغيير التصنيف دون ذكر معنى، والمصدر يفسر اللفظ بأنه «نائِمون نِصفَ النَّهَارِ».",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -875,7 +875,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "إحالة",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "تضمنت الإجابة إشارة إلى تفسير آخر، بينما المصدر يبين أن «تَقْرِضُهُمْ» تعني «تُجاوِزُهم وتَدَعُهم».",
+      "aiNote": "الإجابة إشارة إلى وجود تفسير آخر، بينما نص المصدر يفسرها بـ«تُجاوِزُهم وتَدَعُهم».",
       "aiConfidence": 1,
       "status": "مطابقة"
     },
@@ -911,7 +911,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ واثق",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "ذكرت الإجابة «من لا مال له»، بينما بيّن الحديث أنه الذي «يأتي يوم القيامة بحسنات» فتؤخذ منه لغرماء ظلمه.",
+      "aiNote": "فسّرتَ المفلس بفاقد المال، بينما بيّن الحديث أنه: «يأتي يوم القيامة بحسنات، ثم تؤخذ منه لمن ظلمهم».",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     },
@@ -929,8 +929,8 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "صحيح",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "وافقت الإجابة المعنى المذكور في الحديث: «يأتي يوم القيامة بحسنات ثم تؤخذ منه لمن ظلمهم».",
-      "aiConfidence": 0.99,
+      "aiNote": "وافقت الإجابة المعنى المبين في نص الحديث: «يأتي يوم القيامة بحسنات ثم تؤخذ منه لمن ظلمهم».",
+      "aiConfidence": 1,
       "status": "مطابقة"
     },
     {
@@ -947,7 +947,7 @@ export const DOCUMENTED_RUN: DocumentedRun = {
       "verdict": "خطأ",
       "decidedBy": "ai",
       "model": "gemini-3.8-flash (OpenRouter)",
-      "aiNote": "فسّرتَ بالقوة البدنية، بينما بيّن الحديث أن «الشديد الذي يملك نفسه عند الغضب».",
+      "aiNote": "ذكرت الإجابة القوة البدنية ومغالبة الناس، بينما بيّن المصدر أن الشديد هو «الذي يملك نفسه عند الغضب».",
       "aiConfidence": 0.95,
       "status": "مطابقة"
     }
